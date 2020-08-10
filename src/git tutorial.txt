@@ -1,0 +1,34 @@
+1: git init
+2: git config --global user.name 'Matt Hess'
+3: git config --global user.email 'matthijn_hesselman@hotmail.com'
+4: git add index.html
+5: git status --  the index file has changes that need to be committed// aka je put files in staging area
+6: git rm--cached index.html om files uit de staging area te halen
+7: git *.html add of all html files 
+9: op i drukken om in insert modus te komen, om te quiten esc
+10: dan :wq doe om files te committen
+11: om insert gebeuren te bypassen git commit -m ' here comment '
+12:  touch .gitignore , hier folder en files in plaatsen die niet geupload dient te worden
+13: branch aanmaken zodat je niet in de master loopt te kutten
+14: git branch login, want je wil niet op de main branch werken, om te switch git checkout 'branch of interest'
+
+15: als je login changes wil mergen met master het volgend edoen = git merge login, nu krijg je de shit uit login branch in master branch
+
+16: remote gebeuren hieronder
+17: nieuw public project aanmaken en dan het volgende van de page in git-bash plakken
+git remote add origin https://github.com/matthess-ops/myapp-test.git
+
+om online te commiten het volgende doen dit kan alleen als je origin aan hebt gemaakt
+
+git push -u origin master or git push
+
+18: for mutiple developers git pull gebruiken om changes van anderen te downen
+
+
+flow stappen
+
+1: git init alleen doen om een gitfolder aan te maken 
+2: git add .
+3: git commit -m 'comment hier'
+4: git remote add origin https://github.com/matthess-ops/smartlab_timer.git // staat online
+5: git push -u origin master
