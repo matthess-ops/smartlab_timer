@@ -33,6 +33,23 @@ function UrenOverzicht() {
     const[dayOneData,setDayOneData]= useState([0,0,0,0])
     const[counter,setCounter]= useState(0)
 
+    // const[datas, setDatas] = useState([])
+
+
+    const [datas, setDatas] = useState([
+        {
+          date:   1,
+          name: 'john',
+          gender: 'm'
+        },
+        {
+         date:   2,
+          name: 'mary',
+          gender: 'f'
+        }
+    ]);
+    
+
 
 
  
@@ -44,7 +61,6 @@ function UrenOverzicht() {
 
         db.collection(USER_COL).doc(userID)
             .onSnapshot(function (doc) {
-                // var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
 
                 if (doc.exists == true) {
                     
@@ -57,9 +73,6 @@ function UrenOverzicht() {
         
 
 
-
-
-
     }
 
 
@@ -67,16 +80,20 @@ function UrenOverzicht() {
        
         var i;
         for (i = 0; i < 5; i++) { //dagen
+
+
+
+
             let prevDate = moment().subtract(i, "days").format("DD-MM-YYYY");
-            // console.log(i, prevDate)
+            console.log("prevDAte ",prevDate)
 
 
             let dateStart = "dummy";
             let dateTotalTimeWorked = 0;
             let dateTotalTimePaused = 0;
             let dateString = moment().subtract(i, "days").format('dddd DD MMM')
-            var kutcounter =0;
-            console.log("ALS EERST")
+
+            setDatas(datas => datas.concat({date:prevDate,dateString:dateString,dateTotalTimeWorked:0,dateTotalTimePaused:0}))
 
             var j;
             for (j = 0; j < projectNames.length; j++) { //projecten
@@ -84,12 +101,14 @@ function UrenOverzicht() {
                 var docRef = db.collection(USER_COL).doc(userID).collection(PROJECTEN_COL).doc(projectNames[j])
                     .collection(DAGEN_DATA_COL).doc(prevDate);
 
-
-
                 docRef.get().then(function (doc) {
                     if (doc.exists) {
                     
                         
+                   
+                        dateTotalTimeWorked =dateTotalTimeWorked+ doc.data().TotalTimeWorkedToday
+                        dateTotalTimePaused =dateTotalTimePaused+doc.data().dateTotalTimePaused
+
                         if (dateStart == "dummy") {
                             dateStart = doc.data().earliestTimestampForToday
                         }
@@ -97,17 +116,11 @@ function UrenOverzicht() {
                             dateStart = doc.data().earliestTimestampForToday
 
                         }
-                        var newkut =dayOneData[0]+1
-                        setDayOneData(dayOneData=>newkut)
-                        setCounter(counter=>counter+1)
+                        console.log("doc.data().TotalTimeWorkedToday ",doc.data().TotalTimeWorkedToday)
+                        setCounter(counter => counter+1)
 
-                        setStateValues(stateOptions =>stateOptions[0].testcounter+1)
-
-
-
-
-                     
-
+                  
+                      
 
                     } else {
                         // doc.data() will be undefined in this case
@@ -123,7 +136,7 @@ function UrenOverzicht() {
 
 
             }
-            console.log("ALS TWEEDED")
+            // console.log("ALS TWEEDED")
 
             if(dateStart !="dummy"){
                 console.log("dateStartToString ",dateStart)
@@ -138,6 +151,7 @@ function UrenOverzicht() {
 
 
         }
+        console.log(datas)
     }
 
 
@@ -152,14 +166,14 @@ function UrenOverzicht() {
 
     useEffect(() => {
 
-        // getProjectNames();
+        getProjectNames();
         // // getData();
 
         // console.log(allowedState[0].testcounter)
-        setCounter(count+1)
-        console.log("lafack ",count)
-        setStateValues(10)
-        console.log("lefuck ",stateValues)
+        // setCounter(count+1)
+        // console.log("lafack ",count)
+        // setStateValues(10)
+        // console.log("lefuck ",stateValues)
 
 
     },[]);
@@ -170,16 +184,29 @@ function UrenOverzicht() {
 
 
 
-    return (
-        <div>
-            {/* <p>{projectNames}</p> */}
-            {/* <p> stateOptions= {stateOptions[0].testcounter}</p> */}
-            {/* <p>safsdf,{stateOptions[0].testcounter}</p> */}
-
-
-
-        </div>
-    );
+        // const data =[{"name":"test1"},{"name":"test2"}];
+        return (
+          <div>
+          {datas.map(function(d, idx){
+             return (<li key={idx}>{d.date}</li>)
+           })}
+          </div>
+        );
 }
 
 export default UrenOverzicht
+
+
+// setDatas(datas => datas.concat({date:prevDate,dateString:dateString,dateTotalTimeWorked:0,dateTotalTimePaused:0}))
+
+
+// render() {
+//     const data =[{"name":"test1"},{"name":"test2"}];
+//     return (
+//       <div>
+//       {data.map(function(d, idx){
+//          return (<li key={idx}>{d.name}</li>)
+//        })}
+//       </div>
+//     );
+//   }

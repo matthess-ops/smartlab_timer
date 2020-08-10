@@ -1,25 +1,49 @@
-const Message = () => {
-  const [messageObj, setMessage] = useState({ message: '', id: 1 });
+import React, { useState, useEffect } from "react";
+
+
+function Testtime() {
+
+
+
+  
+
+  const [datas, setDatas] = useState([
+    {
+      id:   1,
+      name: 'john',
+      gender: 'm'
+    },
+    {
+      id:   2,
+      name: 'mary',
+      gender: 'f'
+    }
+]);
+
+const testfunctie =()=>
+{
+
+
+
+  setDatas(datas => datas.concat({id:4,name:"frits",gender:"adfsd"}))
+  console.log(datas)
+
+
+}
+
+
+   
+ 
+    
 
   return (
     <div>
-      <input
-        type="text"
-        value={messageObj.message}
-        placeholder="Enter a message"
-        onChange={e => {
-          const newMessageObj = { message: e.target.value };
-          setMessage(newMessageObj); // id property is lost
-        }}
-      />
-      <p>
-        <strong>{messageObj.id} : {messageObj.message}</strong>
-      </p>
-  </div>
+      <p>asdfsadfdaf</p>
+
+      <button onClick={()=>testfunctie()} >Start</button>
+    </div>
   );
-};
+}
 
-
-// https://blog.logrocket.com/a-guide-to-usestate-in-react-ecb9952e406c/
-
+export default Testtime
 
