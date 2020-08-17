@@ -10,8 +10,11 @@ import './App.css';
 // import TestUrenRegTimer from './TestUrenRegTimer'
 // import TestUrenRegMain from './TestUrenRegMain'
 import Main from './finalurenreg/Main'
-// import Testtime from './finalurenreg/testime'
+import Testtime from './finalurenreg/testime'
 import UrenOverzich from './finalurenreg/UrenOverzicht'
+import UrenOverzichtTwee from './finalurenreg/urenoverzichttwee'
+import UrenOverzichtDrie from './finalurenreg/urenoverzichtdrie'
+
 
 function App() {
   return (
@@ -25,7 +28,8 @@ function App() {
       {/* <TestUrenRegMain/> */}
       {/* <Main/> */}
       {/* <Testtime/> */}
-      <UrenOverzich/>
+      {/* <UrenOverzich/> */}
+      <UrenOverzichtDrie/>
     </div>
   );
 }

@@ -27,7 +27,7 @@ function Main() {
 
     const [userID, setUserID] = useState("user_id_two");
     const [projectID, setProjectID] = useState("project_two");
-    const [todayDate, setTodayDate] = useState("10-08-2020");
+    const [todayDate, setTodayDate] = useState("12-08-2020");
     const [lastUIState, setLastUIState] = useState("dummy");// kan zijn startUI,pauseUI,hervattenUI en stopUI
     const [lastState, setLastState] = useState("dummy"); // kan zijn start,stop,hervat,pause
     const [timerState, setTimerState] = useState("dummy"); //running of notrunning

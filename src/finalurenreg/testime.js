@@ -32,6 +32,15 @@ const testfunctie =()=>
 }
 
 
+useEffect(() => {
+
+  setDatas(datas => datas.concat({id:4,name:"rrrrr",gender:"adfsd"}))
+  console.log(datas)
+
+
+}, []);
+
+
    
  
     

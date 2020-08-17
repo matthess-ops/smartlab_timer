@@ -25,34 +25,19 @@ const DAGEN_DATA_COL = "dagen_data";
 function UrenOverzicht() {
 
     const [userID, setUserID] = useState("user_id_two");
-  
-    const [projectNames, setProjectNames] = useState(["empty"]);
+    const [counter, setCounter] = useState(0)
 
-    const[totTimeWorked, setTotTimeWorked]= useState([0,0,0,0,0,0])
-
-    const[dayOneData,setDayOneData]= useState([0,0,0,0])
-    const[counter,setCounter]= useState(0)
-
-    // const[datas, setDatas] = useState([])
+    // var [datas, setDatas] = useState([]);
+    var [timeWorked, setTimeWorked] = useState(0);
 
 
-    const [datas, setDatas] = useState([
-        {
-          date:   1,
-          name: 'john',
-          gender: 'm'
-        },
-        {
-         date:   2,
-          name: 'mary',
-          gender: 'f'
-        }
-    ]);
-    
+    var [datas, setDatas] = useState({ date: "07-08-2020", earliest: 1000000000000000000000000000, worked: 0, paused: 0 });
 
 
 
- 
+
+
+
 
 
 
@@ -63,117 +48,269 @@ function UrenOverzicht() {
             .onSnapshot(function (doc) {
 
                 if (doc.exists == true) {
-                    
-                    getData(doc.data().allProjectNames)
+                    // console.log("wat")
+
+                    // setDatas(datas =>datas.concat({     date: 'lefuck',
+                    //     earliest: 'lefuck',
+                    //     totalWorked:  'lefuck',
+                    //     totalPaused:  'lefuck'}))
+                    // console.log(datas)
+                    // console.log(doc.data().allProjectNames)
+
+                    test(doc.data().allProjectNames)
+
 
 
                 }
 
             });
-        
+
+
+
+    }
+
+    const nieuw = () => {
+
+        var docRef = db.collection(USER_COL).doc(userID);
+
+        docRef.get().then(function (doc) {
+
+            if (doc.exists) {
+                console.log(doc.data().allProjectNames)
+                var projectNames = doc.data().allProjectNames;
+                var j;
+                for (j = 0; j < projectNames.length; j++) { //projecten
+
+
+                    db.collection(USER_COL).doc(userID).collection(PROJECTEN_COL).doc(projectNames[j])
+                        .collection(DAGEN_DATA_COL).doc("07-08-2020")
+                        .onSnapshot(function (doc) {
+                            if (doc.exists) {
+                                console.log('doc.daat',doc.data())
+                                console.log('datas',datas)
+                                
+
+                                if(datas.earliest >doc.data().earliestTimestampForToday)
+                                {
+                                    var copyofdatas ={...datas}
+
+                                    console.log("doc.data.earlies is smaller dan datas")
+                                    copyofdatas.earliest =doc.data().earliestTimestampForToday
+                                    setDatas(copyofdatas)
+                                    console.log("copyofdatas ",copyofdatas)
+                                    console.log("after setting of datas ",datas)
+                                    console.log("---------------")
+
+                                }
+
+                             
+
+
+                                // datas.forEach(element => {
+                                //     console.log("le fuck ",element)
+                                //     if (element.date =="07-08-2020"){
+                                //         if (element.earliest > doc.data().earliestTimestampForToday) {
+                                //             element.earliest = doc.data().earliestTimestampForToday
+                                //             console.log("eerlier found")
+                                //         }
+
+                                //     }
+
+                                // })
+                            }
+
+
+                        }
+                        )
+
+
+
+                }
+
+            }
+
+
+
+        })
+
+
 
 
     }
 
 
-    const getData = (projectNames) => {
-       
+    const testtwee = (projectNames) => {
+
+
         var i;
         for (i = 0; i < 5; i++) { //dagen
 
-
-
-
             let prevDate = moment().subtract(i, "days").format("DD-MM-YYYY");
-            console.log("prevDAte ",prevDate)
-
-
-            let dateStart = "dummy";
-            let dateTotalTimeWorked = 0;
-            let dateTotalTimePaused = 0;
-            let dateString = moment().subtract(i, "days").format('dddd DD MMM')
-
-            setDatas(datas => datas.concat({date:prevDate,dateString:dateString,dateTotalTimeWorked:0,dateTotalTimePaused:0}))
 
             var j;
             for (j = 0; j < projectNames.length; j++) { //projecten
 
-                var docRef = db.collection(USER_COL).doc(userID).collection(PROJECTEN_COL).doc(projectNames[j])
-                    .collection(DAGEN_DATA_COL).doc(prevDate);
 
-                docRef.get().then(function (doc) {
-                    if (doc.exists) {
-                    
-                        
-                   
-                        dateTotalTimeWorked =dateTotalTimeWorked+ doc.data().TotalTimeWorkedToday
-                        dateTotalTimePaused =dateTotalTimePaused+doc.data().dateTotalTimePaused
 
-                        if (dateStart == "dummy") {
-                            dateStart = doc.data().earliestTimestampForToday
+                db.collection(USER_COL).doc(userID).collection(PROJECTEN_COL).doc(projectNames[j])
+                    .collection(DAGEN_DATA_COL).doc(prevDate)
+                    .onSnapshot(function (doc) {
+                        if (doc.exists) {
+                            console.log("Current data: ", doc.data());
+
+                            var datafound = false
+                            var foundDatasInDB = {}
+
+                            datas.forEach(element => {
+                                console.log(prevDate, "element data ", element)
+
+                                if (element.date == prevDate) {
+                                    console.log(prevDate, "is found")
+                                    datafound = true
+                                }
+                                else {
+                                    datafound = false
+                                    console.log(prevDate, "not found")
+
+                                }
+
+
+
+                            })
+                            //
+                            if (datafound == false) {
+                                console.log("data is not found")
+                                var newElement = {
+                                    date: prevDate,
+                                    earliest: doc.data().earliestTimestampForToday,
+                                    totalWorked: doc.data().totalTimeWorkedToday,
+                                    totalPaused: doc.data().totalTimePausedToday
+
+                                }
+                                setDatas(datas => datas.concat(newElement))
+                                console.log("setted datas ", datas)
+                            }
+                            else {
+                                var datasCopy = [...datas]
+                                datasCopy.forEach(element => {
+                                    if (element.date == prevDate) {
+                                        element.totalWorked = element.totalWorked + doc.data().totalTimeWorkedToday;
+                                        element.totalPaused = element.totalPaused + doc.data().totalTimePausedToday;
+
+                                        if (element.earliest > doc.data().earliestTimestampForToday) {
+                                            element.earliest = doc.data().earliestTimestampForToday
+                                        }
+                                    }
+
+                                })
+                            }
+
+
                         }
-                        else if (doc.data().earliestTimestampForToday < dateStart) {
-                            dateStart = doc.data().earliestTimestampForToday
+                    });
 
-                        }
-                        console.log("doc.data().TotalTimeWorkedToday ",doc.data().TotalTimeWorkedToday)
-                        setCounter(counter => counter+1)
-
-                  
-                      
-
-                    } else {
-                        // doc.data() will be undefined in this case
-                        console.log("No such document!");
-                    }
-                }).catch(function (error) {
-                    console.log("Error getting document:", error);
-                });
-
-
-                ///////////////
-                // let dateStartToString = moment().unix(dateStart).format().format("HH:SS")
 
 
             }
-            // console.log("ALS TWEEDED")
-
-            if(dateStart !="dummy"){
-                console.log("dateStartToString ",dateStart)
-                console.log("dateTotalTimeWorked ", dateTotalTimeWorked)
-                console.log("dateTotalTimePaused ",dateTotalTimePaused)
-                console.log("dateString ",dateString)
-                console.log("      ")
-
-            }
-  
-
-
-
         }
-        console.log(datas)
+        console.log(datas);
     }
 
 
-    const allowedState = [
-        { testcounter: 0, secs: 0 },
-        { testcounter: 3, secs: 0 }
-      ];
 
-      const [count, setCount] = useState(0);
 
-      const [stateValues, setStateValues] = useState(0);
+
+
+
+    const test = (projectNames) => {
+
+
+        var i;
+        for (i = 0; i < 5; i++) { //dagen
+
+            let prevDate = moment().subtract(i, "days").format("DD-MM-YYYY");
+
+            var j;
+            for (j = 0; j < projectNames.length; j++) { //projecten
+
+
+
+                db.collection(USER_COL).doc(userID).collection(PROJECTEN_COL).doc(projectNames[j])
+                    .collection(DAGEN_DATA_COL).doc(prevDate)
+                    .onSnapshot(function (doc) {
+                        if (doc.exists) {
+                            console.log("Current data: ", doc.data());
+
+                            var datafound = false
+                            var foundDatasInDB = {}
+
+                            datas.forEach(element => {
+                                console.log(prevDate, "element data ", element)
+
+                                if (element.date == prevDate) {
+                                    console.log(prevDate, "is found")
+                                    datafound = true
+                                }
+                                else {
+                                    datafound = false
+                                    console.log(prevDate, "not found")
+
+                                }
+
+
+
+                            })
+                            //
+                            if (datafound == false) {
+                                console.log("data is not found")
+                                var newElement = {
+                                    date: prevDate,
+                                    earliest: doc.data().earliestTimestampForToday,
+                                    totalWorked: doc.data().totalTimeWorkedToday,
+                                    totalPaused: doc.data().totalTimePausedToday
+
+                                }
+                                setDatas(datas => datas.concat(newElement))
+                                console.log("setted datas ", datas)
+                            }
+                            else {
+                                var datasCopy = [...datas]
+                                datasCopy.forEach(element => {
+                                    if (element.date == prevDate) {
+                                        element.totalWorked = element.totalWorked + doc.data().totalTimeWorkedToday;
+                                        element.totalPaused = element.totalPaused + doc.data().totalTimePausedToday;
+
+                                        if (element.earliest > doc.data().earliestTimestampForToday) {
+                                            element.earliest = doc.data().earliestTimestampForToday
+                                        }
+                                    }
+
+                                })
+                            }
+
+
+                        }
+                    });
+
+
+
+            }
+        }
+        console.log(datas);
+    }
+
+
+
+
+
+
 
     useEffect(() => {
+        nieuw()
 
-        getProjectNames();
-        // // getData();
 
-        // console.log(allowedState[0].testcounter)
-        // setCounter(count+1)
-        // console.log("lafack ",count)
-        // setStateValues(10)
-        // console.log("lefuck ",stateValues)
+
+
 
 
     },[]);
@@ -184,29 +321,23 @@ function UrenOverzicht() {
 
 
 
-        // const data =[{"name":"test1"},{"name":"test2"}];
-        return (
-          <div>
-          {datas.map(function(d, idx){
-             return (<li key={idx}>{d.date}</li>)
-           })}
-          </div>
-        );
+    return (
+        <div>
+            {counter}
+            {/* {datas.map(function (d, idx) {
+                return (<li key={idx}>{d.date} {d.earliest} {d.totalWorked} {d.totalPaused}</li>)
+            })} */}
+            <div>     <button onClick={() => nieuw()} >Start</button>            </div>
+
+            <div>earlist time 07-10-2020 {datas.earliest}</div>
+            
+
+
+        </div>
+    );
 }
 
 export default UrenOverzicht
 
 
-// setDatas(datas => datas.concat({date:prevDate,dateString:dateString,dateTotalTimeWorked:0,dateTotalTimePaused:0}))
 
-
-// render() {
-//     const data =[{"name":"test1"},{"name":"test2"}];
-//     return (
-//       <div>
-//       {data.map(function(d, idx){
-//          return (<li key={idx}>{d.name}</li>)
-//        })}
-//       </div>
-//     );
-//   }
