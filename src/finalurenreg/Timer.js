@@ -101,12 +101,12 @@ function Timer(props) {
 
   return (
     <div>
-    <p>tijd gewerkt {timeWorked}</p>
+    {/* <p>tijd gewerkt {timeWorked}</p>
     <p>props.inputTime {props.inputTime} lastInputTime {lastInputTime} </p>
 
     <p>timerState {props.inputTimerState}</p>
     <p>hoursWorked {hoursWorked}</p>
-    <p>minsWorked {minsWorked}</p>
+    <p>minsWorked {minsWorked}</p> */}
     <p>{hoursMinString}</p>
 
 

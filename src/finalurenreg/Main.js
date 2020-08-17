@@ -4,6 +4,8 @@ import moment from 'moment';
 import Timer from './Timer';
 import UrenOverzicht from './UrenOverzicht'
 import * as firebase from 'firebase';
+import './Main.css';
+
 
 
 const GEWERKT = "gewerkt";
@@ -26,8 +28,8 @@ const DAGEN_DATA_COL = "dagen_data";
 function Main() {
 
     const [userID, setUserID] = useState("user_id_two");
-    const [projectID, setProjectID] = useState("project_two");
-    const [todayDate, setTodayDate] = useState("10-08-2020");
+    const [projectID, setProjectID] = useState("project_one");
+    const [todayDate, setTodayDate] = useState("17-08-2020");
     const [lastUIState, setLastUIState] = useState("dummy");// kan zijn startUI,pauseUI,hervattenUI en stopUI
     const [lastState, setLastState] = useState("dummy"); // kan zijn start,stop,hervat,pause
     const [timerState, setTimerState] = useState("dummy"); //running of notrunning
@@ -485,23 +487,19 @@ function Main() {
 
   return (
     <div>
-    <p>current unix={moment().unix()}</p>
+    {/* <p>current unix={moment().unix()}</p>
     <p>unix min 23 uur={moment().unix()-(23*3600)}</p>
     <p>userID= {userID} projectID= {projectID} todayDate= {todayDate}</p>
     <p>lastUIState= {lastUIState} lastState= {lastState} timerState= {timerState} lastTimeStamp={lastTimeStamp}</p>
-    <p>totalTimePausedToday= {totalTimePausedToday} totalTimeWorkedToday= {totalTimeWorkedToday}</p>
-
-
+    <p>totalTimePausedToday= {totalTimePausedToday} totalTimeWorkedToday= {totalTimeWorkedToday}</p> */}
+    <p>inklokken</p>
     <Timer inputTime = {totalTimeWorkedToday} inputTimerState = {timerState} inputTimestamp= {lastTimeStamp}/>
 
-
-
-    <b>{lastUIState ===STARTUI ? <div><button onClick={startPress} >Start</button></div>      :""}</b>
+    <b>{lastUIState ===STARTUI ? <div>  <button className="Button" onClick={startPress} >Start</button></div>      :""}</b>
     <b>{lastUIState ===PAUSEUI ? <div><button onClick={pausePress} >Pauze</button><button onClick={stopPress}>Stop</button></div>      :""}</b>
     <b>{lastUIState ===HERVATTENUI ? <div><button onClick={hervattenPress} >Hervatten</button><button onClick={stopPress} >Stop</button></div>      :""}</b>
 
 
-    <UrenOverzicht/>
     
     </div>
   );
