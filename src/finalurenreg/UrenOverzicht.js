@@ -66,13 +66,10 @@ function UrenOverzicht() {
                     
                     getData(doc.data().allProjectNames)
 
-
                 }
 
             });
         
-
-
     }
 
 
@@ -88,12 +85,9 @@ function UrenOverzicht() {
             console.log("prevDAte ",prevDate)
 
 
-            let dateStart = "dummy";
-            let dateTotalTimeWorked = 0;
-            let dateTotalTimePaused = 0;
-            let dateString = moment().subtract(i, "days").format('dddd DD MMM')
+        
 
-            setDatas(datas => datas.concat({date:prevDate,dateString:dateString,dateTotalTimeWorked:0,dateTotalTimePaused:0}))
+            setDatas(datas => datas.concat({earliestTimeStampForToday:10000000000000,date:prevDate,dateString:dateString,dateTotalTimeWorked:0,dateTotalTimePaused:0,}))
 
             var j;
             for (j = 0; j < projectNames.length; j++) { //projecten
@@ -103,9 +97,13 @@ function UrenOverzicht() {
 
                 docRef.get().then(function (doc) {
                     if (doc.exists) {
-                    
-                        
-                   
+
+
+                        // const found = array1.find(element => element > 10);
+
+                        const result = datas.find( ({ name }) => name === );
+
+                
                         dateTotalTimeWorked =dateTotalTimeWorked+ doc.data().TotalTimeWorkedToday
                         dateTotalTimePaused =dateTotalTimePaused+doc.data().dateTotalTimePaused
 
