@@ -486,21 +486,18 @@ function Main() {
   
 
   return (
-    <div>
-    {/* <p>current unix={moment().unix()}</p>
-    <p>unix min 23 uur={moment().unix()-(23*3600)}</p>
-    <p>userID= {userID} projectID= {projectID} todayDate= {todayDate}</p>
-    <p>lastUIState= {lastUIState} lastState= {lastState} timerState= {timerState} lastTimeStamp={lastTimeStamp}</p>
-    <p>totalTimePausedToday= {totalTimePausedToday} totalTimeWorkedToday= {totalTimeWorkedToday}</p> */}
+    <div className="Outer" >
+<div className="Inner" >
     <p>inklokken</p>
     <Timer inputTime = {totalTimeWorkedToday} inputTimerState = {timerState} inputTimestamp= {lastTimeStamp}/>
 
-    <b>{lastUIState ===STARTUI ? <div>  <button className="Button" onClick={startPress} >Start</button></div>      :""}</b>
-    <b>{lastUIState ===PAUSEUI ? <div><button onClick={pausePress} >Pauze</button><button onClick={stopPress}>Stop</button></div>      :""}</b>
-    <b>{lastUIState ===HERVATTENUI ? <div><button onClick={hervattenPress} >Hervatten</button><button onClick={stopPress} >Stop</button></div>      :""}</b>
+    <b>{lastUIState ===STARTUI ? <div>  <button className="StartButton" onClick={startPress} >Start</button></div>      :""}</b>
+    <b>{lastUIState ===PAUSEUI ? <div><button className="PauzeButton"  onClick={pausePress} >Pauze</button><button className="StopButton"  onClick={stopPress}>Stop</button></div>      :""}</b>
+    <b>{lastUIState ===HERVATTENUI ? <div><button className="HervattenButton" onClick={hervattenPress} >Hervatten</button><button className="StopButton" onClick={stopPress} >Stop</button></div>      :""}</b>
 
 
     
+    </div>
     </div>
   );
 }

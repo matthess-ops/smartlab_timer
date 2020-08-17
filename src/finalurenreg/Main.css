@@ -1,11 +1,87 @@
-.Button {
+.BackBackGroundDiv{
     background-color: #4CAF50; /* Green */
+    height: 200px;
+    width: 200px;
+
+
+  }
+
+
+  .Inner {
+    background-color: #212F63; /* Green */
+    height: 200px;
+    width: 200px;
+  }
+
+.Outer {
+  width: 100%;
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  /* W3C */
+  display: box;
+  box-pack: center;
+  box-align: center;
+}
+  
+  .StartButton{
+    background-color: #39DFA4;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    margin: 4px 2px;
+
   }
+
+  .StopButton{
+    background-color: #F4405F;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
+
+  .PauzeButton{
+    background-color: #FFBE17;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
+
+  .HervattenButton{
+    background-color: #39DFA4;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+
+  }
+
+  button {
+    color: white;
+
+  }
+  
   
