@@ -4,6 +4,7 @@ import moment from 'moment';
 import Timer from './Timer';
 import * as firebase from 'firebase';
 import 'moment/locale/nl';  // without this line it didn't work
+import './urenoverzichtdrie.css';
 
 
 
@@ -45,7 +46,7 @@ function UrenOverzichtDrie() {
         for (i = 0; i < 6; i++) { //dagen
 
             let prevDate = moment().subtract(i, "days").format("DD-MM-YYYY");
-            let dateFormatted = moment().locale('nl').subtract(i, "days").format('dddd DD MMMM')  
+            let dateFormatted = moment().locale('nl').subtract(i, "days").format('dddd DD MMM')  
             console.log('dateFormatted ',dateFormatted) 
 
             dataArray.push({date:prevDate,startTime:100000000000000,totalWorked:0,totalPaused:0,formattedDate:dateFormatted})
@@ -132,9 +133,7 @@ function UrenOverzichtDrie() {
                     copydataArray[indexNumber].totalPaused =newTotalPaused
                     copydataArray[indexNumber].dateFormatted =copydataArray[indexNumber].dateFormatted
                     
-                    console.log("copy arra y",copydataArray)
                     // setDataArray(dataArray=>copydataArray)
-                    console.log('------------------------------------')
                     setDataArrayOutput(dataArrayOutput=>copydataArray)
 
 
@@ -220,15 +219,32 @@ function UrenOverzichtDrie() {
 // {convertToSec(dataElement.totalPaused)} //{dataElement.date}
     function Todo({ dataElement}) {
         return (
-          <div>
-               {convertStartTime(dataElement.startTime)}    {convertToSec(dataElement.totalWorked)} {dataElement.formattedDate} 
-          </div>
+            <tr>
+            <td>{convertStartTime(dataElement.startTime)} </td>
+            <td> {convertToSec(dataElement.totalWorked)}</td>
+            <td style={{textAlign:"right"}}>{dataElement.formattedDate}  </td>
+            </tr>
+
+
+        //   <div>
+        //        {convertStartTime(dataElement.startTime)}    {convertToSec(dataElement.totalWorked)} {dataElement.formattedDate} 
+        //   </div>
         );
       }
   
 
     return (
-        <div>
+        <div className="BackBackGroundKleur">
+            <div className= "BackGroundKleur">
+                <p style={{color: "white",fontSize: 15, textAlign:"left",marginLeft:8}}> Urenoverzicht</p>
+                
+        <table className = "TableStyle">
+
+        <tr>
+        <th>Starttijd</th>
+        <th>Aantal uren</th>
+        <th style={{textAlign:"right"}} >Datum</th>
+        </tr>
 
         {dataArrayOutput.map((todo, index) => (
           <Todo
@@ -238,10 +254,10 @@ function UrenOverzichtDrie() {
           />
         ))}
 
-        {/* <div>{projectArray}</div> */}
-        <div>{test}</div>
 
 
+        </table>
+        </div>
         </div>
 
     );

@@ -107,7 +107,9 @@ function Timer(props) {
     <p>timerState {props.inputTimerState}</p>
     <p>hoursWorked {hoursWorked}</p>
     <p>minsWorked {minsWorked}</p> */}
-    <p>{hoursMinString}</p>
+
+    <div style={{color: "white",fontSize: 23}}>{hoursMinString}</div>
+
 
 
 

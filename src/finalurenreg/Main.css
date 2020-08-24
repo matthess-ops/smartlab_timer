@@ -1,87 +1,85 @@
-.BackBackGroundDiv{
-    background-color: #4CAF50; /* Green */
-    height: 200px;
-    width: 200px;
 
 
-  }
+.KlokBackGroundOuterOuter {
+  background-color: #121C41;
+  height: 159px;
+  width: 159px;
+  position: relative;
 
 
-  .Inner {
-    background-color: #212F63; /* Green */
-    height: 200px;
-    width: 200px;
-  }
-
-.Outer {
-  width: 100%;
-  /* Firefox */
-  display: -moz-box;
-  -moz-box-pack: center;
-  -moz-box-align: center;
-  /* Safari and Chrome */
-  display: -webkit-box;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-  /* W3C */
-  display: box;
-  box-pack: center;
-  box-align: center;
 }
   
-  .StartButton{
-    background-color: #39DFA4;
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-
+  .KlokBackGroundOuter{
+    background-color: #212F63;
+    height: 119px;
+    width: 142px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ 
+  
   }
+
+ 
 
   .StopButton{
     background-color: #F4405F;
-    border: none;
     color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+  border: none;
+  text-align: center;
+  height: 20px;
+  width: 60px;
+  font-size: 9px;
+  border-radius: 4px;
   }
 
   .PauzeButton{
     background-color: #FFBE17;
-    border: none;
     color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    border: none;
+    /* text-align: center; */
+    height: 20px;
+    width: 60px;
+    margin-right: 5px;
+    font-size: 9px;
+    border-radius: 4px;
   }
 
   .HervattenButton{
     background-color: #39DFA4;
+    color: white;
     border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    /* text-align: center; */
+    height: 20px;
+    width: 60px;
+    margin-right: 5px;
+    font-size: 9px;
+    border-radius: 4px;
 
   }
 
-  button {
-    color: white;
+.StartButton{
+  background-color: #39DFA4;
+  color: white;
+  border: none;
+  text-align: center;
+  height: 20px;
+  width: 125px;
+  margin-bottom: 5px;  
+  font-size: 9px;
+  border-radius: 4px;
 
-  }
-  
+  /* display: inline-block; */
+
+
+
+}
+
+.ButtonDiv{
+  /* margin-bottom: 5px;   */
+  padding-top: 18px;
+
+}
+
   

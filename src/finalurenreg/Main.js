@@ -29,7 +29,7 @@ function Main() {
 
     const [userID, setUserID] = useState("user_id_two");
     const [projectID, setProjectID] = useState("project_one");
-    const [todayDate, setTodayDate] = useState("17-08-2020");
+    const [todayDate, setTodayDate] = useState("24-08-2020");
     const [lastUIState, setLastUIState] = useState("dummy");// kan zijn startUI,pauseUI,hervattenUI en stopUI
     const [lastState, setLastState] = useState("dummy"); // kan zijn start,stop,hervat,pause
     const [timerState, setTimerState] = useState("dummy"); //running of notrunning
@@ -227,7 +227,7 @@ function Main() {
 
 
      
-      });
+      },[]);
     {/* <p>lastUIState= {lastUIState} lastUIStateChange= {lastState} timerState= {timerState} </p> */}
 
 
@@ -486,18 +486,19 @@ function Main() {
   
 
   return (
-    <div className="Outer" >
-<div className="Inner" >
-    <p>inklokken</p>
-    <Timer inputTime = {totalTimeWorkedToday} inputTimerState = {timerState} inputTimestamp= {lastTimeStamp}/>
+    <div className="KlokBackGroundOuterOuter" >
+    <div className="KlokBackGroundOuter" >
+        <p style={{color: "white",fontSize: 9}}>INKLOKKEN</p>
 
-    <b>{lastUIState ===STARTUI ? <div>  <button className="StartButton" onClick={startPress} >Start</button></div>      :""}</b>
-    <b>{lastUIState ===PAUSEUI ? <div><button className="PauzeButton"  onClick={pausePress} >Pauze</button><button className="StopButton"  onClick={stopPress}>Stop</button></div>      :""}</b>
-    <b>{lastUIState ===HERVATTENUI ? <div><button className="HervattenButton" onClick={hervattenPress} >Hervatten</button><button className="StopButton" onClick={stopPress} >Stop</button></div>      :""}</b>
+        <Timer inputTime = {totalTimeWorkedToday} inputTimerState = {timerState} inputTimestamp= {lastTimeStamp}/>
 
-
-    
-    </div>
+        <div className="ButtonDiv">
+        {lastUIState ===STARTUI ? <div><button className="StartButton" onClick={startPress} >Start</button></div>     :""}  
+        {lastUIState ===PAUSEUI ? <div> <button className="PauzeButton"  onClick={pausePress} >Pauze</button><button className="StopButton"  onClick={stopPress}>Stop</button></div>     :""}
+        {lastUIState ===HERVATTENUI ? <div><button className="HervattenButton" onClick={hervattenPress} >Hervatten</button><button className="StopButton" onClick={stopPress} >Stop</button></div>      :""}
+        </div>
+        
+        </div>
     </div>
   );
 }
