@@ -1,0 +1,20 @@
+alleen usestate gebruiken wanneer het echt nodig. Hierdoor voorkom je ook de gekke render gevallen
+
+meerdere connecties oplossen valt denk ik te fixen door unsubscriben
+
+meer met global gaan werken
+
+meer functies maken die voorschillende doeleinden te gebruiken zijn
+    - bv snapshots listeners
+    
+front end gebeuren responsive maken, thijs vragen wat hij daar voor gebruikt.
+
+test driven development spul gaan doen.
+
+Vergeten functie:
+
+fixen wanneer een timer van 1 project is gestart, dan de andere timers die eventueel nog niet uit staan automatisch uitzetten
+
+
+
+

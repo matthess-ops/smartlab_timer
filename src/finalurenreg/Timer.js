@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-
-function Timer(props) {
+// {totalTimeWorkedToday} inputTimerState = {timerState} inputTimestamp= {lastTimeStamp}
+// props zijn als de timer state running/nonrunning is, totale tijd gewerkt vandaag aan dit project en wanneer de laaste knop actie is verricht.
+function Timer(props) { 
 
     var [timeWorked, setTimeWorked] = useState(0);
     var [lastInputTime,setLastInputTime] = useState(0);
@@ -21,7 +22,7 @@ function Timer(props) {
         makeHoursMinString(fullHours,Math.round(decimals*60));
     }
 
-
+    // genereer de output tijd string
     const makeHoursMinString =(inhours,inmins)=>
     {
         var outputString ="";
@@ -47,22 +48,21 @@ function Timer(props) {
     }
   
 
-
+    //Het probleem is dat na het sluiten van de browser terwijl de timer loopt. Het na het openen van 
+    //een nieuwe browser weer de tijd gereset wordt na de input prop tijd. Dit is prima als er pauze
+    //wordt gehouden immers de timer dient ook stil te staan. Maar als de timer state running is moet de verstreken
+    //tijd tussen de input prop tijd en de current tijd bij de timer opgeteld worden.
     var addTime= () => {
-    //   if (lastInputTime != props.inputTime) // als de vorige inputTime niet veranderd deze functie niet herhalen anders wordt de timer continue geresterd met de prop.inputTime en wordt er dus niet geincrement
-    //   {
-        // calcHoursMins();
+
         if (props.inputTimerState == "running")
-        { // het probleem is als de tabblad is weg geklikt terwijl de timer loopt. Het na het openen
-          //van een nieuwe browser weer de tijd wordt gereset naar de tijd die in de database (props.inputTime) staat.
-          //nu wordt er gecheckt als de timer running is. Zoedoende ja berekende tijd die verstreken is tussen
-          //(props.inputTime) en add die op.
-          var curTime = Math.round(new Date().getTime()/1000); // als de inputTimeState running is de tijd sinds laatse props.inputTime berekenen en add deze voordat useeffect begint te tellen
+        { 
+          
+     
+          var curTime = Math.round(new Date().getTime()/1000); // als de inputTimeState running is, moet je de tijd sinds laatse props.inputTime berekenen en add deze voordat useeffect begint te tellen
           var diff = curTime-props.inputTimestamp;
      
           setTimeWorked(timeWorked =>props.inputTime+diff);
           calcHoursMins();
-        // setLastInputTime(lastInputTime=>props.inputTime); // dus als de tijd in main veranderd is. wordt de timer tijd hier veranderd
 
 
         }
@@ -70,18 +70,11 @@ function Timer(props) {
         {
           setTimeWorked(timeWorked =>props.inputTime);
           calcHoursMins();
-        // setLastInputTime(lastInputTime=>props.inputTime); // dus als de tijd in main veranderd is. wordt de timer tijd hier veranderd
 
 
         }
 
-    //   }
-    //   else
-    //   {
-    //     calcHoursMins();
-    //     // setLastInputTime(lastInputTime=>props.inputTime); // 
-
-    //   }
+  
     };
 
 
@@ -101,12 +94,7 @@ function Timer(props) {
 
   return (
     <div>
-    {/* <p>tijd gewerkt {timeWorked}</p>
-    <p>props.inputTime {props.inputTime} lastInputTime {lastInputTime} </p>
 
-    <p>timerState {props.inputTimerState}</p>
-    <p>hoursWorked {hoursWorked}</p>
-    <p>minsWorked {minsWorked}</p> */}
 
     <div style={{color: "white",fontSize: 23}}>{hoursMinString}</div>
 
