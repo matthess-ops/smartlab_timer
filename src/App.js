@@ -14,6 +14,10 @@ import Main from './finalurenreg/Main'
 // import UrenOverzich from './finalurenreg/UrenOverzicht'
 // import UrenOverzichtTwee from './finalurenreg/urenoverzichttwee'
 import UrenOverzichtDrie from './finalurenreg/urenoverzichtdrie'
+// import Timer from './urenregclean/Timer2'
+// import Main from './urenregclean/Main2'
+import Unsub from './urenregclean/unsub'
+
 
 
 function App() {
@@ -30,6 +34,9 @@ function App() {
       {/* <Testtime/> */}
       {/* <UrenOverzich/> */}
       <UrenOverzichtDrie/>
+      {/* {<Main/>} */}
+      {/* {<Unsub/>} */}
+
     </div>
   );
 }

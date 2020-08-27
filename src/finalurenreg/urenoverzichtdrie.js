@@ -191,12 +191,14 @@ function UrenOverzichtDrie() {
     function Todo({ dataElement}) {
         return (
             // return data als table rij
+            <tbody>
+
             <tr> 
             <td>{convertStartTime(dataElement.startTime)} </td>
             <td> {convertToSec(dataElement.totalWorked)}</td>
             <td style={{textAlign:"right"}}>{dataElement.formattedDate}  </td>
             </tr>
-
+            </tbody>
 
      
         );
@@ -209,17 +211,18 @@ function UrenOverzichtDrie() {
                 <p style={{color: "white",fontSize: 15, textAlign:"left",marginLeft:8}}> Urenoverzicht</p>
                 
         <table className = "TableStyle">
-
+        <tbody>
         <tr>
         <th>Starttijd</th>
         <th>Aantal uren</th>
         <th style={{textAlign:"right"}} >Datum</th>
         </tr>
+        </tbody>
 
         {dataArrayOutput.map((todo, index) => (
           <Todo
         
-            dataElement={todo}
+            dataElement={todo} key ={index}
       
           />
         ))}

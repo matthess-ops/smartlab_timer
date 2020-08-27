@@ -29,7 +29,7 @@ function Main() {
 
     const [userID, setUserID] = useState("user_id_two"); //tijdelijke eigen input
     const [projectID, setProjectID] = useState("project_two"); // tijdelijke eigen input
-    const [todayDate, setTodayDate] = useState("25-08-2020"); // tijdeljke eigen input, zodat ik met de datums kan spelen 
+    const [todayDate, setTodayDate] = useState(moment().format("DD-MM-YYYY")); // tijdeljke eigen input, zodat ik met de datums kan spelen 
     const [lastUIState, setLastUIState] = useState("dummy");// kan zijn startUI,pauseUI,hervattenUI en stopUI
     const [lastState, setLastState] = useState("dummy"); // kan zijn start,stop,hervat,pause
     const [timerState, setTimerState] = useState("dummy"); //running of notrunning
